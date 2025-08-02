@@ -37,7 +37,7 @@ jobs:
                   password: ${{ secrets.GITHUB_TOKEN }}
                   image: ${{ env.IMAGE_NAME }}
                   tag: ${{ github.ref_name }}
-                  composefile: server.yaml
+                  composefile: container.yaml
               run: |
                   dnf -y install rpm-ostree skopeo createrepo_c dnf5 selinux-policy-targeted --enablerepo=updates-testing
                   skopeo login -u $username -p $password $registry
