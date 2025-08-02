@@ -32,7 +32,7 @@ packages:
     - libXmu-devel mesa-libGLU-devel libX11-devel mesa-libEGL-devel libtiff clang-tools-extra
     - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
     - systemd systemd-networkd systemd-resolved nss-altfiles
-    - dnf zsh
+    - dnf zsh vim nano less which findutils
 
 postprocess:
     - |
