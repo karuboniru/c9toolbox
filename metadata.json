@@ -1,0 +1,7 @@
+{
+    "Env": [],
+    "Cmd": ["/bin/bash"],
+    "Labels": {
+        "com.github.containers.toolbox": "true"
+    }
+}

@@ -1,0 +1,64 @@
+[baseos]
+name=CentOS Stream $releasever - BaseOS
+#metalink=https://mirrors.centos.org/metalink?repo=centos-baseos-$stream&arch=$basearch&protocol=https,http
+baseurl=https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[appstream]
+name=CentOS Stream $releasever - AppStream
+#metalink=https://mirrors.centos.org/metalink?repo=centos-appstream-$stream&arch=$basearch&protocol=https,http
+baseurl=https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[NFV]
+name=Centos Stream $releasever - NFV
+baseurl=https://mirror.stream.centos.org/9-stream/NFV/x86_64/os
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[CRB]
+name=Centos Stream $releasever - CRB
+baseurl=https://mirror.stream.centos.org/9-stream/CRB/x86_64/os
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[HighAvailability]
+name=Centos Stream $releasever - High Availability
+baseurl=https://mirror.stream.centos.org/9-stream/HighAvailability/x86_64/os
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[RT]
+name=Centos Stream $releasever - RT
+baseurl=https://mirror.stream.centos.org/9-stream/RT/x86_64/os
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
+
+[ResilientStorage]
+name=Centos Stream $releasever - Resilient Storage
+baseurl=https://mirror.stream.centos.org/9-stream/ResilientStorage/x86_64/os
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1

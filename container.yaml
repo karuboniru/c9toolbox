@@ -1,0 +1,69 @@
+edition: "2024"
+container-cmd:
+    - /bin/bash
+selinux: false
+documentation: false
+recommends: false
+container: true
+sysusers: "compose-auto"
+releasever: "9"
+repos:
+    - baseos
+    - appstream
+    - CRB
+    - epel
+    - cernvm
+    - cernvm-config
+
+include:
+    - package.yaml
+
+packages:
+    - bash
+    - rpm
+    - rpm-ostree
+    - mesa-dri-drivers epel-release epel-next-release flatpak-xdg-utils flatpak-spawn
+    - cvmfs cvmfs-fuse3
+    - gcc gcc-c++ gcc-gfortran gdb
+    - libxml2-devel curl-devel /usr/lib64/libexpat.so /usr/lib64/libfreetype.so ftgl
+    - libXmu-devel mesa-libGLU-devel libX11-devel mesa-libEGL-devel libtiff clang-tools-extra
+    - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
+    - systemd systemd-networkd systemd-resolved nss-altfiles
+    - dnf
+
+postprocess:
+    - |
+        #!/usr/bin/env bash
+        set -euo pipefail
+        # Create the /cvmfs directory and set permissions
+        mkdir -p /etc/tmpfiles.d
+        for path in /cvmfs ; do
+          echo "d $path 0755 root root -" >> /etc/tmpfiles.d/cvmfs.conf
+        done
+        # Configure systemd-networkd to initialize all netdev
+        mkdir -p /etc/systemd/network
+        echo "[Match]
+        Name=*
+
+        [Network]
+        DHCP=yes
+        " > /etc/systemd/network/99-default.network
+        ln -s ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+        systemctl preset-all
+        systemctl enable  systemd-networkd.service \
+                          systemd-networkd-wait-online.service \
+                          systemd-resolved.service
+
+add-files:
+    [
+        ["cvmfs/default.local", "/etc/cvmfs/default.local"],
+        [
+            "cvmfs/keys/ihep.ac.cn/ihep.ac.cn.pub",
+            "/etc/cvmfs/keys/ihep.ac.cn/ihep.ac.cn.pub",
+        ],
+        [
+            "cvmfs/domain.d/ihep.ac.cn.conf",
+            "/etc/cvmfs/domain.d/ihep.ac.cn.conf",
+        ],
+        ["fstab", "/etc/fstab"],
+    ]
