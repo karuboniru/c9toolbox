@@ -28,6 +28,8 @@ packages:
     - mesa-dri-drivers epel-release epel-next-release flatpak-xdg-utils flatpak-spawn
     - cvmfs cvmfs-fuse3
     - gcc gcc-c++ gcc-gfortran gdb clang
+    - ninja-build cmake
+    - /usr/lib64/pkcs11/libtpm2_pkcs11.so
     - libxml2-devel curl-devel /usr/lib64/libexpat.so /usr/lib64/libfreetype.so ftgl
     - libXmu-devel mesa-libGLU-devel libX11-devel mesa-libEGL-devel libtiff clang-tools-extra
     - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
