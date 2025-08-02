@@ -32,7 +32,7 @@ packages:
     - libXmu-devel mesa-libGLU-devel libX11-devel mesa-libEGL-devel libtiff clang-tools-extra
     - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
     - systemd systemd-networkd systemd-resolved nss-altfiles
-    - dnf
+    - dnf zsh
 
 postprocess:
     - |
@@ -71,4 +71,6 @@ add-files:
             "/etc/cvmfs/domain.d/ihep.ac.cn.conf",
         ],
         ["fstab", "/etc/fstab"],
+        ["files/mount.sh", "/etc/profile.d/mount.sh"],
+        ["files/toolbox.sh", "/etc/profile.d/toolbox.sh"],
     ]
