@@ -35,6 +35,7 @@ packages:
     - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
     - systemd systemd-networkd systemd-resolved nss-altfiles
     - dnf zsh vim nano less which findutils strace
+    - libnsl2
     - /usr/lib64/libbsd.so.0 /usr/lib64/libXdmcp.so.6 /usr/lib64/libxkbcommon.so.0
     - /usr/lib64/libxkbcommon-x11.so.0
     - /usr/lib64/libasound.so.2
