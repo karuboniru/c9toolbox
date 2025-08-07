@@ -3,5 +3,5 @@ if [ -f /run/.containerenv ]; then
   sudo systemd-tmpfiles --create --boot --exclude-prefix=/dev >/dev/null 2>&1 ||:
   # container don't come with systemd that mounts
   # fstab, do it on our own
-  sudo mount -a >/dev/null 2>&1 || echo "Failed to handle mounts"
+  sudo mount -a >/dev/null 2>&1 ||:
 fi
