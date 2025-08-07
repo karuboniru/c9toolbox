@@ -46,11 +46,6 @@ postprocess:
     - |
         #!/usr/bin/env bash
         set -euo pipefail
-        # Create the /cvmfs directory and set permissions
-        mkdir -p /etc/tmpfiles.d
-        for path in /cvmfs ; do
-          echo "d $path 0755 root root -" >> /etc/tmpfiles.d/cvmfs.conf
-        done
         # Configure systemd-networkd to initialize all netdev
         mkdir -p /etc/systemd/network
         echo "[Match]
