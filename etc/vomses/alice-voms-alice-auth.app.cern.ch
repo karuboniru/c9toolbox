@@ -1,1 +1,0 @@
-"alice" "voms-alice-auth.app.cern.ch" "443" "/DC=ch/DC=cern/OU=computers/CN=alice-auth.web.cern.ch" "alice" "24"

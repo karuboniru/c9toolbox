@@ -1,5 +1,7 @@
 cvmfs-config.cern.ch      /cvmfs/cvmfs-config.cern.ch         cvmfs _netdev,X-mount.mkdir,x-systemd.nobootwait 0 0
 
+grid.cern.ch              /cvmfs/grid.cern.ch                 cvmfs _netdev,X-mount.mkdir,x-systemd.nobootwait,x-systemd.requires=/cvmfs/cvmfs-config.cern.ch 0 0
+
 juno.ihep.ac.cn           /cvmfs/juno.ihep.ac.cn              cvmfs _netdev,X-mount.mkdir,x-systemd.nobootwait,x-systemd.requires=/cvmfs/cvmfs-config.cern.ch 0 0
 
 dcomputing.ihep.ac.cn     /cvmfs/dcomputing.ihep.ac.cn        cvmfs _netdev,X-mount.mkdir,x-systemd.nobootwait,x-systemd.requires=/cvmfs/cvmfs-config.cern.ch 0 0

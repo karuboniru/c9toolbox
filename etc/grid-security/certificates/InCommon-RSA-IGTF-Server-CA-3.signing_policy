@@ -1,3 +1,0 @@
-access_id_CA   X509    '/C=US/O=Internet2/CN=InCommon RSA IGTF Server CA 3'
-pos_rights     globus  CA:sign
-cond_subjects  globus  '"/DC=org/DC=incommon/*"'
