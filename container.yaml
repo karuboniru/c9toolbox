@@ -43,7 +43,7 @@ packages:
   - /usr/lib64/libxkbcommon-x11.so.0
   - /usr/lib64/libasound.so.2
   - vulkan-loader
-  - voms-clients-cpp eos-client eos-xrootd xrootd-voms
+  - voms-clients-cpp eos-client eos-xrootd xrootd-voms xrootd-client
 
 postprocess:
   - |
