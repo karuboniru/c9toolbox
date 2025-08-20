@@ -1,6 +1,6 @@
 edition: "2024"
 container-cmd:
-    - /bin/bash
+  - /bin/bash
 selinux: false
 documentation: false
 recommends: false
@@ -8,73 +8,64 @@ container: true
 sysusers: "compose-auto"
 releasever: "9"
 repos:
-    - baseos
-    - appstream
-    - CRB
-    - epel
-    - cernvm
-    - cernvm-config
+  - baseos
+  - appstream
+  - CRB
+  - epel
+  - cernvm
+  - cernvm-config
+  - eos
+  - eos-dep
 etc-group-members:
-    - wheel
-    - root
+  - wheel
+  - root
 
 include:
-    - package.yaml
+  - package.yaml
 
 packages:
-    - bash
-    - rpm
-    - rpm-ostree
-    - mesa-dri-drivers epel-release epel-next-release flatpak-xdg-utils flatpak-spawn
-    - cvmfs cvmfs-fuse3
-    - gcc gcc-c++ gcc-gfortran gdb clang
-    - gcc-toolset-15
-    - ninja-build cmake
-    - /usr/lib64/pkcs11/libtpm2_pkcs11.so
-    - libxml2-devel curl-devel /usr/lib64/libexpat.so /usr/lib64/libfreetype.so ftgl
-    - libXmu-devel mesa-libGLU-devel libX11-devel mesa-libEGL-devel libtiff clang-tools-extra
-    - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
-    - systemd systemd-networkd systemd-resolved nss-altfiles
-    - dnf zsh vim nano less which findutils strace
-    - libnsl2 libatomic mold
-    - /usr/lib64/libbsd.so.0 /usr/lib64/libXdmcp.so.6 /usr/lib64/libxkbcommon.so.0
-    - /usr/lib64/libxkbcommon-x11.so.0
-    - /usr/lib64/libasound.so.2
-    - vulkan-loader
+  - bash tar gzip
+  - rpm
+  - rpm-ostree
+  - mesa-dri-drivers epel-release epel-next-release flatpak-xdg-utils flatpak-spawn
+  - cvmfs cvmfs-fuse3
+  - gcc gcc-c++ gcc-gfortran gdb clang
+  - gcc-toolset-15
+  - ninja-build cmake
+  - /usr/lib64/pkcs11/libtpm2_pkcs11.so
+  - libxml2-devel curl-devel /usr/lib64/libexpat.so /usr/lib64/libfreetype.so ftgl
+  - libXmu-devel mesa-libGLU-devel libX11-devel mesa-libEGL-devel libtiff clang-tools-extra
+  - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
+  - systemd systemd-networkd systemd-resolved nss-altfiles
+  - dnf zsh vim nano less which findutils strace
+  - libnsl2 libatomic mold
+  - /usr/lib64/libbsd.so.0 /usr/lib64/libXdmcp.so.6 /usr/lib64/libxkbcommon.so.0
+  - /usr/lib64/libxkbcommon-x11.so.0
+  - /usr/lib64/libasound.so.2
+  - vulkan-loader
+  - fetch-crl voms-clients-cpp eos-client eos-xrootd xrootd-voms
 
 postprocess:
-    - |
-        #!/usr/bin/env bash
-        set -euo pipefail
-        # Configure systemd-networkd to initialize all netdev
-        mkdir -p /etc/systemd/network
-        echo "[Match]
-        Name=*
+  - |
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # Configure systemd-networkd to initialize all netdev
+    mkdir -p /etc/systemd/network
+    echo "[Match]
+    Name=*
 
-        [Network]
-        DHCP=yes
-        " > /etc/systemd/network/99-default.network
-        ln -s ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-        systemctl preset-all
-        systemctl enable  systemd-networkd.service \
-                          systemd-networkd-wait-online.service \
-                          systemd-resolved.service
-        mkdir -p /etc/sudoers.d
-        echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/toolbox
-        ln -sf /usr/bin/mold /etc/alternatives/ld
+    [Network]
+    DHCP=yes
+    " > /etc/systemd/network/99-default.network
+    ln -s ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+    systemctl preset-all
+    systemctl enable  systemd-networkd.service \
+                      systemd-networkd-wait-online.service \
+                      systemd-resolved.service
+    mkdir -p /etc/sudoers.d
+    echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/toolbox
+    ln -sf /usr/bin/mold /etc/alternatives/ld
+    tar --owner=root --group=root -xzf /etc/additional_files.tar.gz -C /
+    rm -f /etc/additional_files.tar.gz
 
-add-files:
-    [
-        ["cvmfs/default.local", "/etc/cvmfs/default.local"],
-        [
-            "cvmfs/keys/ihep.ac.cn/ihep.ac.cn.pub",
-            "/etc/cvmfs/keys/ihep.ac.cn/ihep.ac.cn.pub",
-        ],
-        [
-            "cvmfs/domain.d/ihep.ac.cn.conf",
-            "/etc/cvmfs/domain.d/ihep.ac.cn.conf",
-        ],
-        ["fstab", "/etc/fstab"],
-        ["files/mount.sh", "/etc/profile.d/mount.sh"],
-        ["files/toolbox.sh", "/etc/profile.d/toolbox.sh"],
-    ]
+add-files: [["additional_files.tar.gz", "/etc/additional_files.tar.gz"]]

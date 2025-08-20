@@ -1,0 +1,21 @@
+# @(#)policy-igtf-mics.info - IGTF mics authorities
+# Generated Monday, 02 Jun, 2025
+alias = policy-igtf-mics
+version = 1.136
+requires = GEANTTCSAuthenticationRSACA5 = 1.136, \
+    GEANTTCSAuthenticationECCCA4B = 1.136, \
+    GEANTTCSAuthenticationRSACA4B = 1.136, \
+    GEANTeSciencePersonalCA4 = 1.136, \
+    GEANTeSciencePersonalECCCA4 = 1.136, \
+    GEANTTCSAuthenticationECCCA5 = 1.136
+subjectdn = "/C=NL/O=GEANT Vereniging/CN=GEANT TCS Authentication RSA CA 5", \
+    "/C=NL/O=GEANT Vereniging/CN=GEANT TCS Authentication ECC CA 4B", \
+    "/C=NL/O=GEANT Vereniging/CN=GEANT TCS Authentication RSA CA 4B", \
+    "/C=NL/O=GEANT Vereniging/CN=GEANT eScience Personal CA 4", \
+    "/C=NL/O=GEANT Vereniging/CN=GEANT eScience Personal ECC CA 4", \
+    "/C=NL/O=GEANT Vereniging/CN=GEANT TCS Authentication ECC CA 5"
+obsoletes = TACC-MICS, \
+    NCSA-mics, \
+    TERENAeSciencePersonalCA3, \
+    HPCI, \
+    cilogon-silver

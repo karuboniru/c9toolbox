@@ -6,45 +6,46 @@ name: Build Ostree Container Image
 # documentation.
 
 on:
-    push:
-        branches: ["*"]
+  push:
+    branches: ["*"]
 
 env:
-    # Use docker.io for Docker Hub if empty
-    REGISTRY: ghcr.io
-    # github.repository as <account>/<repo>
-    IMAGE_NAME: ${{ github.repository }}
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        container:
-            image: fedora:latest
-            options: --privileged
-        permissions:
-            contents: read
-            packages: write
-            id-token: write
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+      options: --privileged
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-            - name: Build
-              env:
-                  registry: ${{ env.REGISTRY }}
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-                  image: ${{ env.IMAGE_NAME }}
-                  tag: ${{ github.ref_name }}
-                  composefile: container.yaml
-              run: |
-                  dnf -y install rpm-ostree skopeo createrepo_c dnf5 selinux-policy-targeted --enablerepo=updates-testing
-                  skopeo login -u $username -p $password $registry
-                  mkdir -p repo cache
-                  ostree init --repo=repo --mode=archive
-                  rpm-ostree compose image --initialize-mode=if-not-exists \
-                    --format registry --layer-repo repo --cachedir=cache \
-                    --image-config metadata.json \
-                    $composefile \
-                    $registry/$image:$tag
+      - name: Build
+        env:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          image: ${{ env.IMAGE_NAME }}
+          tag: ${{ github.ref_name }}
+          composefile: container.yaml
+        run: |
+          dnf -y install rpm-ostree skopeo createrepo_c dnf5 selinux-policy-targeted --enablerepo=updates-testing
+          skopeo login -u $username -p $password $registry
+          mkdir -p repo cache
+          tar czfv additional_files.tar.gz --owner=root --group=root etc
+          ostree init --repo=repo --mode=archive
+          rpm-ostree compose image --initialize-mode=if-not-exists \
+            --format registry --layer-repo repo --cachedir=cache \
+            --image-config metadata.json \
+            $composefile \
+            $registry/$image:$tag
