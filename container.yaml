@@ -67,8 +67,5 @@ postprocess:
     ln -sf /usr/bin/mold /etc/alternatives/ld
     tar --owner=root --group=root -xzf /etc/additional_files.tar.gz -C /
     rm -f /etc/additional_files.tar.gz
-    rm -rf /etc/grid-security
-    ln -s /cvmfs/grid.cern.ch/etc/grid-security /etc
-    ln -s /cvmfs/grid.cern.ch/etc/grid-security/vomses /etc
 
 add-files: [["additional_files.tar.gz", "/etc/additional_files.tar.gz"]]
