@@ -1,4 +1,10 @@
 CVMFS_REPOSITORIES=atlas.cern.ch,cms.cern.ch,lhcb.cern.ch,juno.ihep.ac.cn,lhaaso.ihep.ac.cn,common.ihep.ac.cn
-#CVMFS_CACHE_BASE=/tmp/cvmfs
-CVMFS_QUOTA_LIMIT=40960
 CVMFS_HTTP_PROXY="DIRECT"
+CVMFS_CACHE_REFCOUNT=yes
+CVMFS_SHARED_CACHE=yes
+
+# seeing severe performance issue on my epyc machine,
+# so enable aggressive kcache
+CVMFS_KCACHE_TIMEOUT=300
+CVMFS_CACHE_SYMLINKS=yes
+CVMFS_STATFS_CACHE_TIMEOUT=300
