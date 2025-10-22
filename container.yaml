@@ -35,7 +35,7 @@ packages:
   - /usr/lib64/pkcs11/libtpm2_pkcs11.so
   - libxml2-devel curl-devel /usr/lib64/libexpat.so /usr/lib64/libfreetype.so ftgl
   - libXmu-devel mesa-libGLU-devel libX11-devel mesa-libEGL-devel libtiff clang-tools-extra
-  - libXpm-devel libicu-devel libXft git openssh-clients gsl-devel make patch glibc-devel
+  - libXpm-devel libicu-devel libXft git openssh-clients openssh-server gsl-devel make patch glibc-devel
   - systemd systemd-networkd systemd-resolved nss-altfiles
   - dnf zsh vim nano less which findutils strace
   - libnsl2 libatomic mold
