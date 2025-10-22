@@ -67,5 +67,6 @@ postprocess:
     ln -sf /usr/bin/mold /etc/alternatives/ld
     tar --owner=root --group=root -xzf /etc/additional_files.tar.gz -C /
     rm -f /etc/additional_files.tar.gz
+    sed '/shadow/ s/$/ systemd/' /etc/nsswitch.conf -i
 
 add-files: [["additional_files.tar.gz", "/etc/additional_files.tar.gz"]]
