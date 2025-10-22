@@ -59,9 +59,15 @@ postprocess:
     " > /etc/systemd/network/99-default.network
     ln -s ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
     systemctl preset-all
+    systemctl disable sshd.service
     systemctl enable  systemd-networkd.service \
                       systemd-networkd-wait-online.service \
-                      systemd-resolved.service
+                      systemd-resolved.service \
+                      sshd.socket
+    mkdir -p /etc/systemd/system/sshd.socket.d
+    echo "[Socket]
+    ListenStream=/run/host/unix-export/ssh
+    " > /etc/systemd/system/sshd.socket.d/override.conf
     mkdir -p /etc/sudoers.d
     echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/toolbox
     ln -sf /usr/bin/mold /etc/alternatives/ld
