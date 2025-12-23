@@ -44,6 +44,7 @@ packages:
   - /usr/lib64/libasound.so.2
   - vulkan-loader
   - voms-clients-cpp eos-client eos-xrootd xrootd-voms xrootd-client
+  - libzstd-devel
 
 postprocess:
   - |
